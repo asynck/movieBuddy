@@ -1,0 +1,72 @@
+* {
+  box-sizing: border-box;
+  font-family: Montserrat, monospace;
+}
+
+body {
+  height: 100%;
+  color: rgba(27, 27, 27, 0.863);
+}
+
+html {
+  height: 100%;
+}
+
+.border {
+  border: 1px solid rgb(214, 214, 214);
+  border-radius: 4px;
+}
+
+button {
+  border: 1px solid rgb(86, 192, 228);
+  width: 75px;
+  height: 41px;
+  margin: 0 36px;
+  border-radius: 4px;
+  color: #ffff;
+  font-size: 20px;
+  background-color: rgb(86, 192, 228);
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: rgb(115, 212, 245);
+}
+
+button:active {
+  background-color: rgb(240, 240, 234);
+}
+
+button:focus {
+  outline: 0;
+}
+
+#copyright {
+  color: gray;
+  font-size: 10px;
+  position: relative;
+  margin: 0 auto;
+  margin-top: 170px !important;
+  margin-bottom: 30px;
+  padding-right: 10px;
+  /* bottom: -200px; */
+}
+
+#copyrightImg {
+  width: 22px;
+  height: 22px;
+  position: absolute;
+  margin-left: 5px;
+  bottom: -4px;
+}
+
+/* TO ADD */
+/* @media (max-width: 600px) {
+    
+    .buttons {
+        font-size: 5px;
+        width: 35px;
+        height: 15px;
+        padding: 0;
+    }
+} */
