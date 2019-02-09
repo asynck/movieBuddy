@@ -48,7 +48,7 @@ function fetchSearch() {
         movie.appendChild(div1);
         movie.appendChild(div2);
         movie.appendChild(div3);
-        document.querySelector(".results").classList.remove("hidden");
+        results.classList.remove("hidden");
       });
     });
 }
