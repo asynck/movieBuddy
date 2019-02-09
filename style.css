@@ -26,7 +26,7 @@ body {
   height: 56px;
   padding: 13px;
   font-size: 20px;
-  font-weight: 500;
+  font-weight: 400;
   box-shadow: 3px 3px 5px 6px rgba(0, 0, 0, 0.15);
 }
 
@@ -35,10 +35,53 @@ body {
   outline-color: black;
 }
 
+.hidden {
+  display: none;
+}
+
 .firstPageItems {
   position: fixed;
   top: 50%;
   left: 50%;
   margin-top: -28px;
   margin-left: -250px;
+}
+
+.results {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+}
+
+.results::after {
+  content: "";
+  background: url(https://i.ytimg.com/vi/TjW1SsvbA9s/maxresdefault.jpg);
+  opacity: 0.1;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  position: fixed;
+  z-index: -1;
+}
+
+.movie {
+  flex-basis: 18%;
+  margin: 10px 10px;
+}
+
+.movie:hover {
+  box-shadow: 2px 8px 45px rgba(236, 236, 236);
+  transform: translate3D(0, -2px, 0);
+  cursor: pointer;
+}
+
+.movie img {
+  max-height: 344px;
+  max-width: 233px;
+}
+
+.movie div:nth-child(3) {
+  font-size: 13px;
 }
