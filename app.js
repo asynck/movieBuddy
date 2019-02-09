@@ -32,23 +32,28 @@ function fetchSearch() {
       return response.json();
     })
     .then(function(myJson) {
-      console.log(myJson);
-      myJson.Search.forEach(function(film) {
-        let movie = document.createElement("div");
-        movie.classList.add("movie");
-        results.appendChild(movie);
-        let div1 = document.createElement("div");
-        let div2 = document.createElement("div");
-        let div3 = document.createElement("div");
-        let img = document.createElement("img");
-        img.src = film.Poster;
-        div1.appendChild(img);
-        div2.innerText = film.Title;
-        div3.innerText = film.Year;
-        movie.appendChild(div1);
-        movie.appendChild(div2);
-        movie.appendChild(div3);
+      if (myJson.Response == "True") {
+        console.log(myJson);
+        myJson.Search.forEach(function(film) {
+          let movie = document.createElement("div");
+          movie.classList.add("movie");
+          results.appendChild(movie);
+          let div1 = document.createElement("div");
+          let div2 = document.createElement("div");
+          let div3 = document.createElement("div");
+          let img = document.createElement("img");
+          img.src = film.Poster;
+          div1.appendChild(img);
+          div2.innerText = film.Title;
+          div3.innerText = film.Year;
+          movie.appendChild(div1);
+          movie.appendChild(div2);
+          movie.appendChild(div3);
+          results.classList.remove("hidden");
+        });
+      } else {
+        results.innerText = myJson.Error;
         results.classList.remove("hidden");
-      });
+      }
     });
 }
