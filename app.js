@@ -24,7 +24,7 @@ document.getElementById("goButton").addEventListener("click", function() {
 
 //fire search call to omdb
 function fetchSearch() {
-  fetch("http://www.omdbapi.com/?apikey=c85894a7&s=" + searchInput)
+  fetch("http://www.omdbapi.com/?apikey=c85894a7&type=movie&s=" + searchInput)
     .then(function(response) {
       if (!response.ok) {
         console.error("HTTP error, status = " + response.status);
@@ -51,8 +51,19 @@ function fetchSearch() {
           movie.appendChild(div3);
           results.classList.remove("hidden");
         });
-      } else {
+      } else if (myJson.Response == "False") {
         results.innerText = myJson.Error;
+        let back = document.createElement("button");
+        back.innerHTML = "Go back ?";
+        results.appendChild(back);
+        results.style.fontSize = "40px";
+        results.style.margin = "400px auto";
+        back.style.marginLeft = "25px";
+        back.style.width = "124px";
+        back.style.height = "53px";
+        back.addEventListener("click", function() {
+          location.reload(true);
+        });
         results.classList.remove("hidden");
       }
     });
