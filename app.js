@@ -24,6 +24,10 @@ document.getElementById("goButton").addEventListener("click", function() {
   document.getElementById("copyright").classList.add("hidden");
 });
 
+// document.getElementById("arrowRight").addEventListener("click", function() {
+//   fetchSearch();
+// })
+
 //fire search call to omdb
 function fetchSearch() {
   fetch("http://www.omdbapi.com/?apikey=c85894a7&type=movie&s=" + searchInput)
@@ -52,6 +56,7 @@ function fetchSearch() {
           movie.appendChild(div2);
           movie.appendChild(div3);
           results.classList.remove("hidden");
+          document.querySelector(".arrows").classList.remove("hidden");
           movie.addEventListener("click", function() {
             let id = film.imdbID;
             fetch("http://www.omdbapi.com/?apikey=c85894a7&i=" + id)
@@ -62,10 +67,11 @@ function fetchSearch() {
                 return response.json();
               })
               .then(function(movieJson) {
-                console.log(movieJson);
+                // console.log(movieJson);
                 let moviePage = document.querySelector(".moviePage");
                 moviePage.classList.remove("hidden");
                 results.style.opacity = "0.05";
+                document.querySelector(".arrows").classList.add("hidden");
                 let div4 = document.createElement("div");
                 let div5 = document.createElement("div");
                 moviePage.appendChild(div4);
@@ -99,13 +105,14 @@ function fetchSearch() {
                   "Metascore Rating: " +
                   movieJson.Metascore;
                 div4.appendChild(div11);
-                let img3 = document.createElement("img");
-                img3.src = "arrowLeft.ico";
-                moviePage.appendChild(img3);
+                let img3 = document.querySelector(".arrowLeftforPage");
+                img3.classList.remove("hidden");
                 img3.addEventListener("click", function() {
                   moviePage.classList.add("hidden");
                   moviePage.innerHTML = "";
-                  results.style.opacity = "1";
+                  results.style.opacity ="1";
+                  document.querySelector(".arrows").classList.remove("hidden");
+                  img3.classList.add("hidden");
                 });
               });
           });
