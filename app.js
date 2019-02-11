@@ -6,6 +6,7 @@ document.getElementById("movieSearch").value = "Aliens";
 //vars
 let results = document.querySelector(".results");
 let searchInput = null;
+let currentPage = 1;
 
 //Events to get search value
 document.getElementById("movieSearch").addEventListener("keyup", function() {
@@ -24,13 +25,28 @@ document.getElementById("goButton").addEventListener("click", function() {
   document.getElementById("copyright").classList.add("hidden");
 });
 
-// document.getElementById("arrowRight").addEventListener("click", function() {
-//   fetchSearch();
-// })
+document.getElementById("arrowRight").addEventListener("click", function() {
+  results.innerHTML = "";
+  currentPage++;
+  fetchSearch(currentPage);
+});
+
+document.getElementById("arrowLeft").addEventListener("click", function() {
+  results.innerHTML = "";
+  currentPage--;
+  fetchSearch(currentPage);
+  console.log(currentPage);
+});
 
 //fire search call to omdb
-function fetchSearch() {
-  fetch("http://www.omdbapi.com/?apikey=c85894a7&type=movie&s=" + searchInput)
+function fetchSearch(page) {
+  page = currentPage;
+  fetch(
+    "http://www.omdbapi.com/?apikey=c85894a7&type=movie&s=" +
+      searchInput +
+      "&page=" +
+      page
+  )
     .then(function(response) {
       if (!response.ok) {
         console.error("HTTP error, status = " + response.status);
@@ -39,7 +55,7 @@ function fetchSearch() {
     })
     .then(function(myJson) {
       if (myJson.Response == "True") {
-        // console.log(myJson);
+        console.log(myJson);
         myJson.Search.forEach(function(film) {
           let movie = document.createElement("div");
           movie.classList.add("movie");
@@ -110,7 +126,7 @@ function fetchSearch() {
                 img3.addEventListener("click", function() {
                   moviePage.classList.add("hidden");
                   moviePage.innerHTML = "";
-                  results.style.opacity ="1";
+                  results.style.opacity = "1";
                   document.querySelector(".arrows").classList.remove("hidden");
                   img3.classList.add("hidden");
                 });
@@ -118,6 +134,7 @@ function fetchSearch() {
           });
         });
       } else if (myJson.Response == "False") {
+        console.log(myJson);
         results.innerText = myJson.Error;
         let back = document.createElement("button");
         back.innerHTML = "Go back ?";
