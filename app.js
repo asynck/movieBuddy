@@ -1,7 +1,5 @@
-// example search for title http://www.omdbapi.com/?apikey=c85894a7&t=mad+max
-// example search for search http://www.omdbapi.com/?apikey=c85894a7&s=mad+max&type=movie
-
-document.getElementById("movieSearch").value = "Aliens";
+// dummy data
+// document.getElementById("movieSearch").value = "Aliens";
 
 //vars
 let results = document.querySelector(".results");
@@ -25,6 +23,7 @@ document.getElementById("goButton").addEventListener("click", function() {
   document.getElementById("copyright").classList.add("hidden");
 });
 
+//Event to navigate to pages
 document.getElementById("arrowRight").addEventListener("click", function() {
   results.innerHTML = "";
   currentPage++;
@@ -35,10 +34,9 @@ document.getElementById("arrowLeft").addEventListener("click", function() {
   results.innerHTML = "";
   currentPage--;
   fetchSearch(currentPage);
-  console.log(currentPage);
 });
 
-//fire search call to omdb
+//fire search call to omdb and build results, movie page
 function fetchSearch(page) {
   page = currentPage;
   fetch(
@@ -55,7 +53,7 @@ function fetchSearch(page) {
     })
     .then(function(myJson) {
       if (myJson.Response == "True") {
-        console.log(myJson);
+        // console.log(myJson);
         myJson.Search.forEach(function(film) {
           let movie = document.createElement("div");
           movie.classList.add("movie");
@@ -65,6 +63,7 @@ function fetchSearch(page) {
           let div3 = document.createElement("div");
           let img = document.createElement("img");
           img.src = film.Poster;
+          img.alt = " Image not Found";
           div1.appendChild(img);
           div2.innerText = film.Title;
           div3.innerText = film.Year;
@@ -134,7 +133,7 @@ function fetchSearch(page) {
           });
         });
       } else if (myJson.Response == "False") {
-        console.log(myJson);
+        // console.log(myJson);
         results.innerText = myJson.Error;
         let back = document.createElement("button");
         back.innerHTML = "Go back ?";
